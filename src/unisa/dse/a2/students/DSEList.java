@@ -19,7 +19,13 @@ public class DSEList implements List {
 	}
 	
 	//Takes a list then adds each element into a new list
-	public DSEList(DSEList other) { 	
+	public DSEList(DSEList other) {
+		this.head = other.head;
+		Node currNode = other.head;
+		while (currNode != null) {
+			Node nodemaker = new Node(currNode.prev, currNode.next, currNode.getString());
+			currNode = currNode.next;
+		}
 	}
 
 	//remove the String at the parameter's index
@@ -51,10 +57,18 @@ public class DSEList implements List {
 	//Take each element of the list and writes them to a string 
 	@Override
 	public String toString() {
+		Node currNode = this.head;
+		String concatLinkedList = "";
+		
+		while(currNode!= null){
+			concatLinkedList+=currNode + " ";
+			currNode = currNode.next;
+		}	
+		return concatLinkedList;
 	}
 
 	//add the parameter String at of the end of the list
-	public boolean add(String obj) {// void was boolean but i dont know what boolean would be returned when adding
+	public boolean add(String obj) {
 		if (this.head == null) {
 			Node addedNode = new Node(null, null, obj);
 			this.head = addedNode;
@@ -88,6 +102,8 @@ public class DSEList implements List {
 
 	@Override
 	public boolean equals(Object other) {
+		Node LinkList1 = this.head;
+		//Node LinkList2 =;
 		return true;
 	}
 	
