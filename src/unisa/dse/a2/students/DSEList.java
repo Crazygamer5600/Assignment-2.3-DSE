@@ -14,11 +14,12 @@ public class DSEList implements List {
 	public DSEList() {
 		
 	}
-	public DSEList(Node head_) {
+	public DSEList(Node head) {
+		this.head = head;
 	}
 	
 	//Takes a list then adds each element into a new list
-	public DSEList(DSEList other) { // Copy constructor. 
+	public DSEList(DSEList other) { 	
 	}
 
 	//remove the String at the parameter's index
@@ -36,19 +37,36 @@ public class DSEList implements List {
 
 	//checks if there is a list
 	public boolean isEmpty() {
+		if (this.head == null) {
+			return true;
+		} else {
+			return true;
+		}
 	}
 
 	//return the size of the list
 	public int size() {
 	}
 	
-	//Take each element of the list a writes them to a string 
+	//Take each element of the list and writes them to a string 
 	@Override
 	public String toString() {
 	}
 
 	//add the parameter String at of the end of the list
-	public boolean add(String obj) {
+	public boolean add(String obj) {// void was boolean but i dont know what boolean would be returned when adding
+		if (this.head == null) {
+			Node addedNode = new Node(null, null, obj);
+			this.head = addedNode;
+			this.tail = addedNode;
+			return false;
+		} else {
+			Node addedNode = new Node(null, this.tail, obj);
+			this.tail = addedNode;
+			
+			return false;
+		}
+		
 	}
 
 	//add String at parameter's index
