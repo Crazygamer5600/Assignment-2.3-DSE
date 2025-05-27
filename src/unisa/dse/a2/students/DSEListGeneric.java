@@ -18,7 +18,14 @@ public class DSEListGeneric implements ListGeneric {
 	}
 	
 	//Takes a list then adds each element into a new list
-	public DSEListGeneric(DSEList other) { // Copy constructor. 
+	public DSEListGeneric(DSEListGeneric other) { // Copy constructor. 
+		this.head = other.head;
+		NodeGeneric currNode = other.head;
+		
+		while (currNode != null) {
+			NodeGeneric nodemaker = new NodeGeneric(currNode.next, currNode.prev, currNode.get());
+			currNode = currNode.next;
+		}
 	}
 
 	//remove and return the item at the parameter's index
@@ -36,6 +43,11 @@ public class DSEListGeneric implements ListGeneric {
 
 	//checks if there is a list
 	public boolean isEmpty() {
+		if (this.head == null) {
+			return true;
+		} else {
+			return true;
+		}
 	}
 
 	//return the size of the list
@@ -45,6 +57,14 @@ public class DSEListGeneric implements ListGeneric {
 	//Take each element of the list a writes them to a string 
 	@Override
 	public String toString() {
+		NodeGeneric currNode = this.head;
+		String concatLinkedList = "";
+		
+		while(currNode!= null){
+			concatLinkedList+=currNode + " ";
+			currNode = currNode.next;
+		}	
+		return concatLinkedList;
 	}
 
 	//add the parameter item at of the end of the list
@@ -53,6 +73,17 @@ public class DSEListGeneric implements ListGeneric {
 
 	//add item at parameter's index
 	public boolean add(int index, Object obj) {
+		if (this.head == null) {
+			NodeGeneric addedNode = new NodeGeneric(null, null, obj);
+			this.head = addedNode;
+			this.tail = addedNode;
+			return false;
+		} else {
+			NodeGeneric addedNode = new NodeGeneric(null, this.tail, obj);
+			this.tail = addedNode;
+			
+			return false;
+		}
 	}
 
 	//searches list for parameter's String return true if found
@@ -70,7 +101,14 @@ public class DSEListGeneric implements ListGeneric {
 
 	@Override
 	public boolean equals(Object other) {
+		Node LinkList1 = this.head;
+		//Node LinkList2 =;
 		return true;
+	}
+	@Override
+	public int indexOf(Object node) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

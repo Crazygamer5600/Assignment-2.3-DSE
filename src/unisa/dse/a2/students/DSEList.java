@@ -23,14 +23,14 @@ public class DSEList implements List {
 		this.head = other.head;
 		Node currNode = other.head;
 		while (currNode != null) {
-			Node nodemaker = new Node(currNode.prev, currNode.next, currNode.getString());
+			Node nodemaker = new Node(currNode.next, currNode.prev, currNode.getString());
 			currNode = currNode.next;
 		}
 	}
 
 	//remove the String at the parameter's index
 	public String remove(int index) {
-
+		
 	}
 
 	//returns the index of the String parameter 
@@ -39,6 +39,20 @@ public class DSEList implements List {
 	
 	//returns String at parameter's index
 	public String get(int index) {
+		Node currNode = this.head;
+		int currNodeIndex = 0;
+		int listSize = this.size();
+		
+		if (listSize >= index && listSize != 0) {
+			while (currNode != null && currNodeIndex < index-1) {
+			currNode = currNode.next;
+			currNodeIndex += 1;
+			}
+			return currNode.getString();
+		} else {
+			return "null";
+		}
+		
 	}
 
 	//checks if there is a list
@@ -52,6 +66,13 @@ public class DSEList implements List {
 
 	//return the size of the list
 	public int size() {
+		Node currNode = this.head;
+		int size = 0;
+		while (currNode != null) {
+			currNode = currNode.next;
+			size+=1;
+		}
+		return size;
 	}
 	
 	//Take each element of the list and writes them to a string 
@@ -61,7 +82,7 @@ public class DSEList implements List {
 		String concatLinkedList = "";
 		
 		while(currNode!= null){
-			concatLinkedList+=currNode + " ";
+			concatLinkedList+=currNode.getString() + " ";
 			currNode = currNode.next;
 		}	
 		return concatLinkedList;
@@ -76,6 +97,7 @@ public class DSEList implements List {
 			return false;
 		} else {
 			Node addedNode = new Node(null, this.tail, obj);
+			this.tail.next = addedNode;
 			this.tail = addedNode;
 			
 			return false;
