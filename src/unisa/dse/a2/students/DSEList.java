@@ -16,11 +16,13 @@ public class DSEList implements List {
 	}
 	public DSEList(Node head) {
 		this.head = head;
+		
 	}
 	
 	//Takes a list then adds each element into a new list
 	public DSEList(DSEList other) {
 		this.head = other.head;
+		int index = 0;
 		Node currNode = other.head;
 		while (currNode != null) {
 			Node nodemaker = new Node(currNode.next, currNode.prev, currNode.getString());
@@ -35,6 +37,19 @@ public class DSEList implements List {
 
 	//returns the index of the String parameter 
 	public int indexOf(String obj) {
+		Node currNode = this.head;
+		int currNodeIndex = 0;
+		int listSize = this.size();
+		
+		while (currNodeIndex < listSize) {
+			if (currNode.getString() == obj) {
+				currNodeIndex += 1;
+				break;
+			}
+			currNode = currNode.next;
+			currNodeIndex += 1;
+		}
+		return currNodeIndex;
 	}
 	
 	//returns String at parameter's index
@@ -94,13 +109,13 @@ public class DSEList implements List {
 			Node addedNode = new Node(null, null, obj);
 			this.head = addedNode;
 			this.tail = addedNode;
-			return false;
+			return true;
 		} else {
 			Node addedNode = new Node(null, this.tail, obj);
 			this.tail.next = addedNode;
 			this.tail = addedNode;
 			
-			return false;
+			return true;
 		}
 		
 	}
