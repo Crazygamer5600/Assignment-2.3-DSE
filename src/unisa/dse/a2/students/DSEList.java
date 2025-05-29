@@ -21,27 +21,39 @@ public class DSEList implements List {
 	
 	//Takes a list then adds each element into a new list
 	public DSEList(DSEList other) {
-		this.head = other.head;
-		int index = 0;
-		Node currNode = other.head;
-		while (currNode != null) {
-			Node nodemaker = new Node(currNode.next, currNode.prev, currNode.getString());
-			currNode = currNode.next;
+		// Make a copy of the head from other
+		Node headClone = new Node(null,null,other.head.getString());
+		this.head = headClone;
+		
+		Node ogIterator = other.head;
+		Node cloneIterator = headClone;
+		while (ogIterator != null) {
+			Node nodeClone = new Node(null, null, ogIterator.getString());
+			cloneIterator.next = nodeClone;
+			nodeClone.prev = cloneIterator;	
+			cloneIterator = cloneIterator.next;
+			ogIterator = ogIterator.next;
 		}
+		this.tail = cloneIterator;
 	}
 
 	//remove the String at the parameter's index
 	public String remove(int index) {
-		
+		for(int nodeIterator = 0; nodeIterator <= index; nodeIterator+=1) {
+			if (this.size() == 1) {
+				this.head = null;
+				this.tail = null;
+			} 
+			
+		}
 	}
 
 	//returns the index of the String parameter 
 	public int indexOf(String obj) {
 		Node currNode = this.head;
 		int currNodeIndex = 0;
-		int listSize = this.size();
 		
-		while (currNodeIndex < listSize) {
+		while (currNodeIndex < this.size()) {
 			if (currNode.getString() == obj) {
 				currNodeIndex += 1;
 				break;

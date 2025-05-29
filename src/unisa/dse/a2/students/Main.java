@@ -13,6 +13,7 @@ public static void main(String[] args) {
 	System.out.println(tester.get(3));
 	System.out.println(tester.size());
 	System.out.println(tester.indexOf("yay"));
+
 //	System.out.println(tester.head.getString());
 //	System.out.println(tester.head.next.getString());
 //	System.out.println(tester.head.next.next.getString());
