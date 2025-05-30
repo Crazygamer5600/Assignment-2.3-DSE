@@ -129,7 +129,7 @@ public class DSEListGeneric implements ListGeneric {
 		String concatLinkedList = "";
 		
 		while(currNode!= null){
-			concatLinkedList+=currNode + " ";
+			concatLinkedList+=currNode.get() + " ";
 			currNode = currNode.next;
 		}	
 		return concatLinkedList;

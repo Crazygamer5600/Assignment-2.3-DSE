@@ -217,8 +217,6 @@ public class DSEList implements List {
 
 	@Override
 	public boolean equals(Object other) {
-		Node LinkList1 = this.head;
-		//Node LinkList2 =;
 		return true;
 	}
 	
