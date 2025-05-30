@@ -39,13 +39,39 @@ public class DSEList implements List {
 
 	//remove the String at the parameter's index
 	public String remove(int index) {
-		for(int nodeIterator = 0; nodeIterator <= index; nodeIterator+=1) {
-			if (this.size() == 1) {
-				this.head = null;
-				this.tail = null;
-			} 
-			
+		if (index == 1){
+			Node headCopy =this.head;
+			this.head = this.head.next;
+			headCopy.next = null;
+			this.head.prev = null;
+			return this.toString();
+		} 
+		else if (index == this.size()) {
+			Node tailCopy = this.tail;
+			this.tail = this.tail.prev;
+			tailCopy.prev = null;
+			this.tail.next = null;
+			return this.toString();
 		}
+		else if (index>1 && index<this.size()) {
+			Node currNode = this.head;
+			for(int currIndex = 0; currIndex < index; currIndex+=1) {
+				if (currIndex == index-1) {
+					currNode.prev.next = currNode.next;
+					currNode.next.prev = currNode.prev;
+					currNode.next = null;
+					currNode.prev = null;
+				}
+				else {
+					currNode = currNode.next;
+				}
+			}	
+			return this.toString();
+		}
+		else {
+			return this.toString();
+		}
+		
 	}
 
 	//returns the index of the String parameter 

@@ -9,10 +9,15 @@ public static void main(String[] args) {
 	tester.add("yay");
 	tester.add("yolo");
 	tester.add("lol");
+	tester.add("bro");
+	tester.add("dude");
 	System.out.println(tester.toString());
 	System.out.println(tester.get(3));
 	System.out.println(tester.size());
 	System.out.println(tester.indexOf("yay"));
+	System.out.println(tester.remove(1));
+	System.out.println(tester.remove(4));
+	System.out.println(tester.remove(2));
 
 //	System.out.println(tester.head.getString());
 //	System.out.println(tester.head.next.getString());
