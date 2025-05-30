@@ -83,6 +83,9 @@ public class DSEList implements List {
 			if (currNode.getString() == obj) {
 				currNodeIndex += 1;
 				break;
+			} else if (currNodeIndex == this.size()-1 && currNode.getString() != obj) {
+				currNodeIndex = -1;
+				break;
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
@@ -208,6 +211,12 @@ public class DSEList implements List {
 
 	//removes the parameter's String form the list
 	public boolean remove(String obj) {
+		if (this.contains(obj) == true) {
+			this.remove(this.indexOf(obj));
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@Override

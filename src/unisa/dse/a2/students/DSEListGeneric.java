@@ -78,6 +78,9 @@ public class DSEListGeneric implements ListGeneric {
 			if (currNode.get() == obj) {
 				currNodeIndex += 1;
 				break;
+			}else if (currNodeIndex == this.size()-1 && currNode.get() != obj) {
+				currNodeIndex = -1;
+				break;
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
@@ -201,7 +204,12 @@ public class DSEListGeneric implements ListGeneric {
 
 	//removes the parameter's item form the list
 	public boolean remove(Object obj) {
-		
+		if (this.contains(obj) == true) {
+			this.remove(this.indexOf(obj));
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@Override

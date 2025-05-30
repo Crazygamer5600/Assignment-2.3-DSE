@@ -16,6 +16,7 @@ public static void main(String[] args) {
 	System.out.println(tester.get(3));
 	System.out.println(tester.size());
 	System.out.println(tester.indexOf("yay"));
+	System.out.println(tester.indexOf("bruh"));
 	System.out.println(tester.remove(1));
 	System.out.println(tester.remove(4));
 	System.out.println(tester.remove(2));
@@ -25,7 +26,8 @@ public static void main(String[] args) {
 	System.out.println(tester.toString());
 	System.out.println(tester.contains("tail2"));
 	System.out.println(tester.contains("tail"));
-	
+	System.out.println(tester.remove("tail2"));
+	System.out.println(tester.toString());	
 	
 	
 	
@@ -42,6 +44,7 @@ public static void main(String[] args) {
 	System.out.println(tester2.get(3));
 	System.out.println(tester2.size());
 	System.out.println(tester2.indexOf("yay"));
+	System.out.println(tester.indexOf("bruh"));
 	System.out.println(tester2.remove(1));
 	System.out.println(tester2.remove(4));
 	System.out.println(tester2.remove(2));
@@ -51,6 +54,8 @@ public static void main(String[] args) {
 	System.out.println(tester2.toString());
 	System.out.println(tester2.contains("tail2"));
 	System.out.println(tester2.contains("tail"));
+	System.out.println(tester2.remove("tail2"));
+	System.out.println(tester2.toString());	
 	
 
 }
