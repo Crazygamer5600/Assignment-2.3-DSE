@@ -21,6 +21,9 @@ public static void main(String[] args) {
 	tester.add(2,"yay");
 	tester.add(1,"head2");
 	tester.add(5,"tail2");
+	System.out.println(tester.toString());
+	System.out.println(tester.contains("tail2"));
+	System.out.println(tester.contains("tail"));
 
 //	System.out.println(tester.head.getString());
 //	System.out.println(tester.head.next.getString());

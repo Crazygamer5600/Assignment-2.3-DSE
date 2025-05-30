@@ -192,6 +192,18 @@ public class DSEList implements List {
 
 	//searches list for parameter's String return true if found
 	public boolean contains(String obj) {
+		Node currNode = this.head;
+		boolean isInList = false;
+		while (currNode.next != null || currNode.getString() == obj) {
+			if (currNode.getString() == obj) {
+				isInList = true;
+			}
+			if (currNode.next == null) {
+				break;
+			}
+			currNode = currNode.next;
+		}
+		return isInList;
 	}
 
 	//removes the parameter's String form the list
