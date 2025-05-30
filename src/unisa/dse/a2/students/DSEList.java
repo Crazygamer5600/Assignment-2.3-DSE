@@ -160,6 +160,34 @@ public class DSEList implements List {
 
 	//add String at parameter's index
 	public boolean add(int index, String obj) {
+		if (index < this.size()+1 && index > 1) {
+			Node currNode = this.head;
+			for(int currIndex = 0; currIndex < index-1; currIndex+=1) {
+				if (currIndex == index-2) {
+					Node nodeMaker = new Node(currNode.next, currNode, obj); 
+					currNode.next.prev = nodeMaker;
+					currNode.next = nodeMaker;
+					break;
+				}
+				currNode = currNode.next;
+			}	
+			return true;
+		}else if (index == 1) {
+			Node headClone = this.head;
+			Node nodeMaker = new Node(this.head, null, obj); 
+			this.head = nodeMaker;
+			headClone.prev = nodeMaker;
+			return true;
+		}else if (index == this.size()+1) {
+			Node tailClone = this.tail;
+			Node nodeMaker = new Node(null, this.tail, obj); 
+			this.tail = nodeMaker;
+			tailClone.next = nodeMaker;
+			return true;
+		}
+		else { 
+			return false;
+		}
 	}
 
 	//searches list for parameter's String return true if found

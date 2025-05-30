@@ -1,6 +1,6 @@
 package unisa.dse.a2.students;
 
-public class Main {
+public class Tester {
 public static void main(String[] args) {
 	DSEList tester = new DSEList();
 	
@@ -18,6 +18,9 @@ public static void main(String[] args) {
 	System.out.println(tester.remove(1));
 	System.out.println(tester.remove(4));
 	System.out.println(tester.remove(2));
+	tester.add(2,"yay");
+	tester.add(1,"head2");
+	tester.add(5,"tail2");
 
 //	System.out.println(tester.head.getString());
 //	System.out.println(tester.head.next.getString());
