@@ -7,7 +7,8 @@ public class ListedCompany {
 	 */
 	private String name;
 	
-	public void getName() {
+	public String getName() {
+		return this.name;
 	}
 
 	/**
@@ -15,19 +16,23 @@ public class ListedCompany {
 	 */
 	private String code;
 	
-	public void getCode() {
+	public String getCode() {
+		return this.code;
 	}
 
 	/**
 	 * Current price of the company after last trade
 	 */
-	private int currentPrice;
+	private double currentPrice;
 	
-	public void getCurrentPrice() {
+	public double getCurrentPrice() {
+		return this.currentPrice;
 	}
 	
-	public ListedCompany(String code, String name, int currentPrice)
-	{
+	public ListedCompany(String code, String name, double currentPrice) {
+		this.code = code;
+		this.name = name;
+		this.currentPrice = currentPrice;
 	}
 	
 	/**
@@ -38,7 +43,13 @@ public class ListedCompany {
 	 * @param quantity
 	 * @return the price after adjustment
 	 */
-	public void processTrade(int quantity)
-	{
+	public double processTrade(double quantity)	{
+		if (this.currentPrice + (quantity / 100) >= 1) {
+			this.currentPrice += quantity / 100;
+			return this.currentPrice;
+		}else {
+			this.currentPrice = 1;
+			return this.currentPrice;
+		}
 	}
 }

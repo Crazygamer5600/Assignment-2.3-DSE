@@ -57,6 +57,10 @@ public static void main(String[] args) {
 	System.out.println(tester2.remove("tail2"));
 	System.out.println(tester2.toString());	
 	
-
+	
+	
+	ListedCompany listedCompany1 = new ListedCompany("blah","blah",1);
+	System.out.println(listedCompany1.processTrade(-100));
+	System.out.println(listedCompany1.processTrade(100));
 }
 }
