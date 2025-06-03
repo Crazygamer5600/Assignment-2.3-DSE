@@ -4,9 +4,10 @@ import unisa.dse.a2.interfaces.ListGeneric;
 
 /**
  * @author simont
+ * @param <T>
  *
  */
-public class DSEListGeneric implements ListGeneric {
+public class DSEListGeneric<T> implements ListGeneric <T> {
 	
 	public NodeGeneric head;
 	private NodeGeneric tail;
@@ -35,20 +36,20 @@ public class DSEListGeneric implements ListGeneric {
 	}
 
 	//remove and return the item at the parameter's index
-	public NodeGeneric remove(int index) {
+	public T remove(int index) {
 		if (index == 1){
 			NodeGeneric headCopy =this.head;
 			this.head = this.head.next;
 			headCopy.next = null;
 			this.head.prev = null;
-			return this.head;
+			return (T) this.head;
 		} 
 		else if (index == this.size()) {
 			NodeGeneric tailCopy = this.tail;
 			this.tail = this.tail.prev;
 			tailCopy.prev = null;
 			this.tail.next = null;
-			return this.tail;
+			return (T) this.tail;
 		}
 		else if (index>1 && index<this.size()) {
 			NodeGeneric currNode = this.head;
@@ -63,14 +64,14 @@ public class DSEListGeneric implements ListGeneric {
 					currNode = currNode.next;
 				}
 			}
-			return this.get(index);
+			return (T) this.get(index);
 		} else {
 			return null;
 		}
 	}
 
 	//returns the index of the String parameter 
-	public int indexOf(String obj) {
+	public int indexOf(T obj) {
 		NodeGeneric currNode = this.head;
 		int currNodeIndex = 0;
 		
@@ -89,7 +90,7 @@ public class DSEListGeneric implements ListGeneric {
 	}
 	
 	//returns item at parameter's index
-	public NodeGeneric get(int index) {
+	public T get(int index) {
 		NodeGeneric currNode = this.head;
 		int currNodeIndex = 0;
 		int listSize = this.size();
@@ -99,7 +100,7 @@ public class DSEListGeneric implements ListGeneric {
 			currNode = currNode.next;
 			currNodeIndex += 1;
 			}
-			return currNode;
+			return (T) currNode;
 		} else {
 			return null;
 		}
@@ -203,7 +204,7 @@ public class DSEListGeneric implements ListGeneric {
 	}
 
 	//removes the parameter's item form the list
-	public boolean remove(Object obj) {
+	public boolean remove(T obj) {
 		if (this.contains(obj) == true) {
 			this.remove(this.indexOf(obj));
 			return true;
@@ -221,10 +222,4 @@ public class DSEListGeneric implements ListGeneric {
 	public boolean equals(Object other) {
 		return true;
 	}
-	@Override
-	public int indexOf(Object node) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }
