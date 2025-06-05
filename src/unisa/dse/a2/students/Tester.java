@@ -30,6 +30,7 @@ public static void main(String[] args) {
 	System.out.println(tester.toString());	
 	
 	
+	System.out.println("\n");
 	
 	DSEListGeneric tester2 = new DSEListGeneric();
 	
@@ -44,6 +45,7 @@ public static void main(String[] args) {
 	System.out.println(tester2.get(3));
 	System.out.println(tester2.size());
 	System.out.println(tester2.indexOf("yay"));
+	System.out.println(tester2.indexOf(7));
 	System.out.println(tester.indexOf("bruh"));
 	System.out.println(tester2.remove(1));
 	System.out.println(tester2.remove(4));
