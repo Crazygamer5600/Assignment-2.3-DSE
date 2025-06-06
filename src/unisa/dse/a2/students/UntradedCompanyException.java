@@ -1,8 +1,8 @@
 package unisa.dse.a2.students;
 
-public class UntradedCompanyException
+public class UntradedCompanyException extends InstantiationException
 {
-	public UntradedCompanyException(String companyCode) throws Exception{
-		throw new Exception('"' + companyCode + "is not a listed company on this exchange" + '"');
+	public UntradedCompanyException(String companyCode){
+		super(companyCode + "is not a listed company on this exchange");
 	}
 }

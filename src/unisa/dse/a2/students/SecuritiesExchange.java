@@ -13,6 +13,7 @@ public class SecuritiesExchange {
 	private String name;
 	
 	public String getName() {
+		return name;
 	}
 	
 	/**
@@ -34,8 +35,8 @@ public class SecuritiesExchange {
 	 * Initialises the exchange ready to handle brokers, announcements, and companies
 	 * @param name
 	 */
-	public SecuritiesExchange(String name)
-	{
+	public SecuritiesExchange(String name) {
+		
 	}
 	
 	/**
@@ -43,16 +44,22 @@ public class SecuritiesExchange {
 	 * @param company
 	 * @return true if the company was added, false if it was not
 	 */
-	public boolean addCompany(ListedCompany company)
-	{
+	public boolean addCompany(ListedCompany company){
+		try {
+			companies.put(name, company);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	/**
 	 * Adds the given broke to the list of brokers on the exchange
 	 * @param company
 	 */
-	public boolean addBroker(StockBroker broker)
-	{
+	public boolean addBroker(StockBroker broker){
+		brokers.add(broker);
+		return true;
 	}
 	
 	/**
@@ -71,12 +78,14 @@ public class SecuritiesExchange {
 	 * @return The number of successful trades completed across all brokers
 	 * @throws UntradedCompanyException when traded company is not listed on this exchange
 	 */
-	public int processTradeRound()
-	{
+	public int processTradeRound(){
+		
 	}
 	
+	/*
 	public int runCommandLineExchange(Scanner sc)
 	{
 		
 	}
+	*/
 }
