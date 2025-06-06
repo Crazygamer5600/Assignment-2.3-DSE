@@ -79,8 +79,22 @@ public class Trade implements Comparable<Trade> {
 	 *  
 	 * @return The ordering priority of the trade
 	 */
-	public int compareTo(Trade t)
-	{
+	public int compareTo(Trade t){
+		if (broker.getWatchlist().contains(this) == true && t.broker.getWatchlist().contains(t) == true) {
+			return 0;
+		} else if (broker.getWatchlist().contains(this) == true && t.broker.getWatchlist().contains(t) == false) {
+			return 1;
+		} else if (broker.getWatchlist().contains(this) == false && t.broker.getWatchlist().contains(t) == true) {
+			return -1;
+		} else {
+			if (this.created < t.created) {
+				return -1;
+			} else if (this.created == t.created) {
+				return 0;
+			} else {
+				return 1;
+			}
+		}
 	}
 	
 
