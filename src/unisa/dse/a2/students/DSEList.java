@@ -99,14 +99,14 @@ public class DSEList implements List {
 		int currNodeIndex = 0;
 		int listSize = this.size();
 		
-		if (listSize >= index && listSize != 0) {
-			while (currNode != null && currNodeIndex < index-1) {
+		if (listSize >= index && listSize != 0 && index>=0) {
+			while (currNodeIndex < index) {
 			currNode = currNode.next;
 			currNodeIndex += 1;
 			}
 			return currNode.getString();
 		} else {
-			return "null";
+			return null;
 		}
 		
 	}
