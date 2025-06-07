@@ -80,10 +80,10 @@ public class DSEList implements List {
 		int currNodeIndex = 0;
 		
 		while (currNodeIndex < this.size()) {
-			if (currNode.getString() == obj) {
+			if (currNode.getString().equals(obj) == true) {
 				currNodeIndex += 1;
 				break;
-			} else if (currNodeIndex == this.size()-1 && currNode.getString() != obj) {
+			} else if (currNodeIndex == this.size()-1 && currNode.getString().equals(obj) != true) {
 				currNodeIndex = -1;
 				break;
 			}
@@ -138,7 +138,11 @@ public class DSEList implements List {
 		String concatLinkedList = "";
 		
 		while(currNode!= null){
-			concatLinkedList+=currNode.getString() + " ";
+			if (currNode!= tail) {
+				concatLinkedList+=currNode.getString() + " ";
+			} else {
+				concatLinkedList+=currNode.getString();
+			}	
 			currNode = currNode.next;
 		}	
 		return concatLinkedList;
@@ -197,8 +201,8 @@ public class DSEList implements List {
 	public boolean contains(String obj) {
 		Node currNode = this.head;
 		boolean isInList = false;
-		while (currNode.next != null || currNode.getString() == obj) {
-			if (currNode.getString() == obj) {
+		while (currNode != null) {
+			if (currNode.getString().equals(obj) == true) {
 				isInList = true;
 			}
 			if (currNode.next == null) {

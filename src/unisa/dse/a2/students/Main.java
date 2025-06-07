@@ -1,6 +1,10 @@
 package unisa.dse.a2.students;
 
-public class Tester {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+
+public class Main {
 public static void main(String[] args) {
 	
 	DSEList tester = new DSEList();
@@ -64,5 +68,15 @@ public static void main(String[] args) {
 	ListedCompany listedCompany1 = new ListedCompany("blah","blah",1);
 	System.out.println(listedCompany1.processTrade(-100));
 	System.out.println(listedCompany1.processTrade(100));
+	
+	DSEList list = new DSEList();
+	list.add(new String(""+0));
+	list.add(new String(""+1));
+	list.add(new String(""+2));
+
+	System.out.println(list.remove(new String(""+2)));
+	System.out.println(list.size());
+	System.out.println(list.toString());
+	System.out.println(list.toString().equals("0 1"));
 }
 }
