@@ -44,10 +44,10 @@ public class ListedCompany {
 	 * @return the price after adjustment
 	 */
 	public double processTrade(double quantity)	{
-		if (this.currentPrice + (quantity / 100) >= 1) {
+		if (this.currentPrice + (quantity / 100) >= 1) {// if the price does not drop below 1
 			this.currentPrice += quantity / 100;
 			return this.currentPrice;
-		}else {
+		}else {// if the price does drop below 1
 			this.currentPrice = 1;
 			return this.currentPrice;
 		}

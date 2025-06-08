@@ -45,10 +45,10 @@ public class SecuritiesExchange {
 	 * @return true if the company was added, false if it was not
 	 */
 	public boolean addCompany(ListedCompany company){
-		try {
+		try {// tries to add a company
 			companies.put(name, company);
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {// if fails returns false
 			return false;
 		}
 	}
