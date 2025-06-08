@@ -45,13 +45,13 @@ public class DSEList implements List {
 			this.head.prev = null;
 			return headCopy.getString();
 		} 
-		else if (index == 0){// condition first index needs removing and something comes after
+		else if (index == 0){// condition first index needs removing and nothing comes after
 			Node headCopy = this.head;
 			headCopy.next = null;
 			this.head = null;
 			return headCopy.getString();
 		} 
-		else if (index == this.size() - 1) {
+		else if (index == this.size() - 1) {//condition that item is removed from tail
 			Node tailCopy = this.tail;
 			this.tail = this.tail.prev;
 			tailCopy.prev = null;
@@ -60,7 +60,7 @@ public class DSEList implements List {
 		}
 		else {
 			Node currNode = this.head;
-			for(int currIndex = 0; currIndex < this.size(); currIndex += 1) {
+			for(int currIndex = 0; currIndex < this.size(); currIndex += 1) {// condition something is being removed somewhere between tail and head
 				if (currIndex == index) {
 					currNode.prev.next = currNode.next;
 					currNode.next.prev = currNode.prev;
@@ -84,12 +84,12 @@ public class DSEList implements List {
 		
 		while (currNodeIndex < this.size()) {
 			if (currNode.getString().equals(obj) == true) {
-				return currNodeIndex;				
+				return currNodeIndex; //once found returns index
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
 		}
-		return -1;
+		return -1; // if never found returns -1
 	}
 	
 	//returns String at parameter's index
@@ -98,7 +98,7 @@ public class DSEList implements List {
 		int currNodeIndex = 0;
 		int listSize = this.size();
 		
-		if (listSize >= index && listSize != 0 && index >= 0) {
+		if (listSize >= index && !this.isEmpty() && index >= 0) { // index doesn't exceed list size list is not empty index is equal to or exceeds 0
 			while (currNodeIndex < index) {
 				currNode = currNode.next;
 				currNodeIndex += 1;
@@ -112,9 +112,10 @@ public class DSEList implements List {
 
 	//checks if there is a list
 	public boolean isEmpty() {
-		if (this.head == null) {
+		if (this.size() == 0) {// if linked list size is 0 then it is empty
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -123,7 +124,7 @@ public class DSEList implements List {
 	public int size() {
 		Node currNode = this.head;
 		int size = 0;
-		while (currNode != null) {
+		while (currNode != null) {// cycles through nodes until null
 			currNode = currNode.next;
 			size+=1;
 		}
@@ -139,7 +140,7 @@ public class DSEList implements List {
 		while(currNode!= null){
 			if (currNode!= tail) {
 				concatLinkedList+=currNode.getString() + " ";
-			} else {
+			} else {// does not add a space at final node
 				concatLinkedList+=currNode.getString();
 			}	
 			currNode = currNode.next;
@@ -149,7 +150,7 @@ public class DSEList implements List {
 
 	//add the parameter String at of the end of the list
 	public boolean add(String obj) {
-		if (this.head == null) {
+		if (this.isEmpty()) {
 			Node addedNode = new Node(null, null, obj);
 			this.head = addedNode;
 			this.tail = addedNode;
@@ -166,30 +167,28 @@ public class DSEList implements List {
 
 	//add String at parameter's index
 	public boolean add(int index, String obj) {
-		if (index == 0) {
+		if (index == 0) {// adds at head
 			Node headClone = this.head;
 			Node nodeMaker = new Node(this.head, null, obj); 
 			this.head = nodeMaker;
 			headClone.prev = nodeMaker;
 			return true;	
 		}
-		else if (index == this.size()) {
-			//NodeGeneric tailClone = this.tail;
+		else if (index == this.size()) {// adds after tail
 			Node nodeMaker = new Node(null, this.tail, obj);
 			this.tail.next = nodeMaker;
 			this.tail = nodeMaker;
-			//tailClone.next = nodeMaker;
 			return true;
 		}
-		else if (index == this.size() - 1) {
+		else if (index == this.size() - 1) {// adds at tail
 			Node nodeMaker = new Node(this.tail, this.tail.prev, obj); 
 			this.tail.prev.next = nodeMaker;
 			this.tail.prev = nodeMaker;
 			return true;
 		}	
-		else if (index < this.size() - 1 && index > 0) {
+		else if (index < this.size() - 1 && index > 0) {// adds between tail and head
 			Node currNode = this.head;
-			for(int currIndex = 0; currIndex <= this.size() - 1; currIndex += 1) {
+			for(int currIndex = 0; currIndex <= this.size() - 1; currIndex += 1) {// cycles through until reaching tail
 				if (currIndex == index) {
 					Node nodeMaker = new Node(currNode.next, currNode, obj); 
 					currNode.next.prev = nodeMaker;
@@ -200,7 +199,7 @@ public class DSEList implements List {
 			}	
 			return true;
 		}
-		else {
+		else {// if number is out of bounds
 			return false;
 		}
 	}
@@ -208,8 +207,8 @@ public class DSEList implements List {
 	public boolean contains(String obj) {
 		Node currNode = this.head;
 		boolean isInList = false;
-		while (currNode != null) {
-			if (currNode.getString().equals(obj) == true) {
+		while (currNode != null) {// while node has a value
+			if (currNode.getString().equals(obj) == true) {// if the node has the same value
 				isInList = true;
 				break;
 			}
