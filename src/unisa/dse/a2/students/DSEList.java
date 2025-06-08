@@ -21,19 +21,19 @@ public class DSEList implements List {
 	
 	//Takes a list then adds each element into a new list
 	public DSEList(DSEList other) {
-		// Make a copy of the head from other
-
-		Node ogIterator = other.head.next;
-		Node cloneIterator = new Node(null,null,other.head.getString());;
-		this.head = cloneIterator;
+	this.head = other.head;
+		
+		Node ogIterator = other.head.next; // iterator which is offset by one node to the next
+		Node cloneIterator = new Node(null,null,other.head.getString()); // deep copy of first original node
+		this.head = cloneIterator; 
 		while (ogIterator != null) {
-			Node nodeClone = new Node(null, null, ogIterator.getString());
-			cloneIterator.next = nodeClone;
-			nodeClone.prev = cloneIterator;	
+			Node nodeClone = new Node(null, null, ogIterator.getString()); // deep copy of the next node
+			cloneIterator.next = nodeClone;//sets next of previous deep copy
+			nodeClone.prev = cloneIterator;// sets prev of current deep copy
 			cloneIterator = cloneIterator.next;
-			ogIterator = ogIterator.next;
+			ogIterator = ogIterator.next;// moves original iterator forward
 		}
-		this.tail = cloneIterator;
+		this.tail = cloneIterator;// sets final node
 	}
 
 	//remove the String at the parameter's index

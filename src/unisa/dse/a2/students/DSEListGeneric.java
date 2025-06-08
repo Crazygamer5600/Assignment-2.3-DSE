@@ -84,12 +84,12 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		
 		while (currNodeIndex < this.size()) {
 			if (currNode.get().equals(obj) == true) {
-				break;
+				return currNodeIndex;				
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
 		}
-		return currNodeIndex;
+		return -1;
 	}
 	
 	//returns item at parameter's index
