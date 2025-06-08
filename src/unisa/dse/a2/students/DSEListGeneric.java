@@ -159,10 +159,32 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 
 	//add item at parameter's index
 	public boolean add(int index, Object obj) {
-		if (index < this.size()+1 && index > 1) {
+		if (index == 0) {
+			NodeGeneric headClone = this.head;
+			NodeGeneric nodeMaker = new NodeGeneric(this.head, null, obj); 
+			this.head = nodeMaker;
+			headClone.prev = nodeMaker;
+			return true;	
+		}
+		else if (index == this.size()) {
+			//NodeGeneric tailClone = this.tail;
+			NodeGeneric nodeMaker = new NodeGeneric(null, this.tail, obj);
+			this.tail.next = nodeMaker;
+			this.tail = nodeMaker;
+			//tailClone.next = nodeMaker;
+			return true;
+		}
+		else if (index == this.size() - 1) {
 			NodeGeneric currNode = this.head;
-			for(int currIndex = 0; currIndex < index-1; currIndex+=1) {
-				if (currIndex == index-2) {
+			NodeGeneric nodeMaker = new NodeGeneric(this.tail, this.tail.prev, obj); 
+			this.tail.prev.next = nodeMaker;
+			this.tail.prev = nodeMaker;
+			return true;
+		}	
+		else if (index < this.size() - 1 && index > 0) {
+			NodeGeneric currNode = this.head;
+			for(int currIndex = 0; currIndex <= this.size() - 1; currIndex += 1) {
+				if (currIndex == index) {
 					NodeGeneric nodeMaker = new NodeGeneric(currNode.next, currNode, obj); 
 					currNode.next.prev = nodeMaker;
 					currNode.next = nodeMaker;
@@ -171,20 +193,8 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 				currNode = currNode.next;
 			}	
 			return true;
-		}else if (index == 1) {
-			NodeGeneric headClone = this.head;
-			NodeGeneric nodeMaker = new NodeGeneric(this.head, null, obj); 
-			this.head = nodeMaker;
-			headClone.prev = nodeMaker;
-			return true;
-		}else if (index == this.size()+1) {
-			NodeGeneric tailClone = this.tail;
-			NodeGeneric nodeMaker = new NodeGeneric(null, this.tail, obj); 
-			this.tail = nodeMaker;
-			tailClone.next = nodeMaker;
-			return true;
 		}
-		else { 
+		else {
 			return false;
 		}
 	}
