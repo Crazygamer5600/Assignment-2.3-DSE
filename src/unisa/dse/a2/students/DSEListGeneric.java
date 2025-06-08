@@ -39,9 +39,15 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 	//remove and return the item at the parameter's index
 	public T remove(int index) {
 		int x = this.size();
-		if (index == 0){
+		if (index == 0 && this.size() > 1){
 			NodeGeneric<T> headCopy = this.head;
 			this.head = this.head.next;
+			headCopy.next = null;
+			this.head.prev = null;
+			return headCopy.get();
+		} 
+		else if (index == 0){
+			NodeGeneric<T> headCopy = this.head;
 			headCopy.next = null;
 			this.head = null;
 			return headCopy.get();
@@ -105,10 +111,11 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 
 	//checks if there is a list
 	public boolean isEmpty() {
-		if (this.head == null) {
+		if (this.size() == 0) {
 			return true;
-		} else {
-			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

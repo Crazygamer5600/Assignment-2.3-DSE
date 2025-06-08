@@ -112,7 +112,6 @@ public class ListGenericTest extends DSUnitTesting {
 		l.add(new Trade(null, 0));
 		l.add(new Trade(null, 1));
 		l.add(new Trade(null, 2));
-
 		Trade t = l.remove(0);
 		assertNotNull("List.remove(int) should not return null when elements exist at that index in the list", t);
 		assertEquals("Remove did not remove from the list correctly", new Trade(null, 0), t);
