@@ -16,59 +16,59 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		
 	}
 	public DSEListGeneric(NodeGeneric head_) {
+		this.head = head_;	
 	}
 	
 	//Takes a list then adds each element into a new list
-	public DSEListGeneric(DSEListGeneric other) { // Copy constructor. 
-		NodeGeneric headClone = new NodeGeneric(null,null,other.head.get());
-		this.head = headClone;
+	public DSEListGeneric(DSEListGeneric other) { // Copy constructor.
+		this.head = other.head;
 		
-		NodeGeneric ogIterator = other.head;
-		NodeGeneric cloneIterator = headClone;
+		NodeGeneric ogIterator = other.head.next; // iterator which is offset by one node to the next
+		NodeGeneric cloneIterator = new NodeGeneric(null,null,other.head.get()); // deep copy of first original node
+		this.head = cloneIterator; 
 		while (ogIterator != null) {
-			NodeGeneric nodeClone = new NodeGeneric(null, null, ogIterator.get());
-			cloneIterator.next = nodeClone;
-			nodeClone.prev = cloneIterator;	
+			NodeGeneric nodeClone = new NodeGeneric(null, null, ogIterator.get()); // deep copy of the next node
+			cloneIterator.next = nodeClone;//sets next of previous deep copy
+			nodeClone.prev = cloneIterator;// sets prev of current deep copy
 			cloneIterator = cloneIterator.next;
-			ogIterator = ogIterator.next;
+			ogIterator = ogIterator.next;// moves original iterator forward
 		}
-		this.tail = cloneIterator;
+		this.tail = cloneIterator;// sets final node
 	}
 
 	//remove and return the item at the parameter's index
 	public T remove(int index) {
 		int x= this.size();
-		if (index == 1){
+		if (index == 0){
 			NodeGeneric headCopy =this.head;
 			this.head = this.head.next;
 			headCopy.next = null;
 			this.head.prev = null;
 			return (T) this.head;
 		} 
-		else if (index == this.size()) {
+		else if (index == this.size() - 1) {
 			NodeGeneric tailCopy = this.tail;
 			this.tail = this.tail.prev;
 			tailCopy.prev = null;
 			this.tail.next = null;
 			return (T) this.tail;
 		}
-		else if (index>1 && index<this.size()) {
+		else {
 			NodeGeneric currNode = this.head;
-			for(int currIndex = 0; currIndex < index; currIndex+=1) {
-				if (currIndex == index-1) {
+			for(int currIndex = 0; currIndex < this.size(); currIndex += 1) {
+				if (currIndex == index) {
 					currNode.prev.next = currNode.next;
 					currNode.next.prev = currNode.prev;
 					currNode.next = null;
 					currNode.prev = null;
+					break;
 				}
 				else {
 					currNode = currNode.next;
 				}
 			}
 			return (T) this.get(index);
-		} else {
-			return null;
-		}
+		} 
 	}
 
 	//returns the index of the String parameter 
@@ -78,7 +78,6 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		
 		while (currNodeIndex < this.size()) {
 			if (currNode.get().equals(obj) == true) {
-				currNodeIndex += 1;
 				break;
 			}
 			currNode = currNode.next;
@@ -89,16 +88,16 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 	
 	//returns item at parameter's index
 	public T get(int index) {
-		NodeGeneric currNode = this.head;
+		NodeGeneric<T> currNode = this.head;
 		int currNodeIndex = 0;
 		int listSize = this.size();
 		
-		if (listSize >= index && listSize != 0 && index>=0) {
+		if (listSize >= index && listSize != 0 && index >= 0) {
 			while (currNodeIndex < index) {
-			currNode = currNode.next;
-			currNodeIndex += 1;
+				currNode = currNode.next;
+				currNodeIndex += 1;
 			}
-			return (T) currNode;
+			return currNode.get();
 		} else {
 			return null;
 		}
@@ -117,17 +116,9 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 	public int size() {
 		NodeGeneric currNode = this.head;
 		int size = 0;
-		
-		if(this.head.get() != null) {
-			size = 1;
-		}
-
 		while (currNode != null) {
-			size+=1;
 			currNode = currNode.next;
-			if (currNode.next == null) {
-				break;
-			}
+			size+=1;
 		}
 		return size;
 	}
@@ -138,11 +129,11 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		NodeGeneric currNode = this.head;
 		String concatLinkedList = "";
 		
-		while(currNode!= null){
-			if (currNode!= tail) {
-				concatLinkedList+=currNode.get() + " ";
+		while(currNode != null){
+			if (currNode != tail) {
+				concatLinkedList += currNode.get() + " ";
 			} else {
-				concatLinkedList+=currNode.get();
+				concatLinkedList += currNode.get();
 				break;
 			}	
 			currNode = currNode.next;

@@ -22,11 +22,10 @@ public class DSEList implements List {
 	//Takes a list then adds each element into a new list
 	public DSEList(DSEList other) {
 		// Make a copy of the head from other
-		Node headClone = new Node(null,null,other.head.getString());
-		this.head = headClone;
-		
-		Node ogIterator = other.head;
-		Node cloneIterator = headClone;
+
+		Node ogIterator = other.head.next;
+		Node cloneIterator = new Node(null,null,other.head.getString());;
+		this.head = cloneIterator;
 		while (ogIterator != null) {
 			Node nodeClone = new Node(null, null, ogIterator.getString());
 			cloneIterator.next = nodeClone;
