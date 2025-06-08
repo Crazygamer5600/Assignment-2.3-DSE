@@ -38,7 +38,6 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 
 	//remove and return the item at the parameter's index
 	public T remove(int index) {
-		int x = this.size();
 		if (index == 0 && this.size() > 1){
 			NodeGeneric<T> headCopy = this.head;
 			this.head = this.head.next;
@@ -174,11 +173,9 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 			return true;	
 		}
 		else if (index == this.size()) {
-			//NodeGeneric tailClone = this.tail;
 			NodeGeneric nodeMaker = new NodeGeneric(null, this.tail, obj);
 			this.tail.next = nodeMaker;
 			this.tail = nodeMaker;
-			//tailClone.next = nodeMaker;
 			return true;
 		}
 		else if (index == this.size() - 1) {

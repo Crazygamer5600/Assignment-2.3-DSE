@@ -38,37 +38,41 @@ public class DSEList implements List {
 
 	//remove the String at the parameter's index
 	public String remove(int index) {
-		if (index == 1){
-			Node headCopy =this.head;
+		if (index == 0 && this.size() > 1){
+			Node headCopy = this.head;
 			this.head = this.head.next;
 			headCopy.next = null;
 			this.head.prev = null;
-			return this.toString();
+			return headCopy.getString();
 		} 
-		else if (index == this.size()) {
+		else if (index == 0){
+			Node headCopy = this.head;
+			headCopy.next = null;
+			this.head = null;
+			return headCopy.getString();
+		} 
+		else if (index == this.size() - 1) {
 			Node tailCopy = this.tail;
 			this.tail = this.tail.prev;
 			tailCopy.prev = null;
 			this.tail.next = null;
-			return this.toString();
+			return tailCopy.getString();
 		}
-		else if (index>1 && index<this.size()) {
+		else {
 			Node currNode = this.head;
-			for(int currIndex = 0; currIndex < index; currIndex+=1) {
-				if (currIndex == index-1) {
+			for(int currIndex = 0; currIndex < this.size(); currIndex += 1) {
+				if (currIndex == index) {
 					currNode.prev.next = currNode.next;
 					currNode.next.prev = currNode.prev;
 					currNode.next = null;
 					currNode.prev = null;
+					break;
 				}
 				else {
 					currNode = currNode.next;
 				}
-			}	
-			return this.toString();
-		}
-		else {
-			return this.toString();
+			}
+			return this.get(index);
 		}
 		
 	}
@@ -80,13 +84,12 @@ public class DSEList implements List {
 		
 		while (currNodeIndex < this.size()) {
 			if (currNode.getString().equals(obj) == true) {
-				currNodeIndex += 1;
-				break;
+				return currNodeIndex;				
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
 		}
-		return currNodeIndex;
+		return -1;
 	}
 	
 	//returns String at parameter's index
@@ -95,10 +98,10 @@ public class DSEList implements List {
 		int currNodeIndex = 0;
 		int listSize = this.size();
 		
-		if (listSize >= index && listSize != 0 && index>=0) {
+		if (listSize >= index && listSize != 0 && index >= 0) {
 			while (currNodeIndex < index) {
-			currNode = currNode.next;
-			currNodeIndex += 1;
+				currNode = currNode.next;
+				currNodeIndex += 1;
 			}
 			return currNode.getString();
 		} else {
@@ -163,10 +166,31 @@ public class DSEList implements List {
 
 	//add String at parameter's index
 	public boolean add(int index, String obj) {
-		if (index < this.size()+1 && index > 1) {
+		if (index == 0) {
+			Node headClone = this.head;
+			Node nodeMaker = new Node(this.head, null, obj); 
+			this.head = nodeMaker;
+			headClone.prev = nodeMaker;
+			return true;	
+		}
+		else if (index == this.size()) {
+			//NodeGeneric tailClone = this.tail;
+			Node nodeMaker = new Node(null, this.tail, obj);
+			this.tail.next = nodeMaker;
+			this.tail = nodeMaker;
+			//tailClone.next = nodeMaker;
+			return true;
+		}
+		else if (index == this.size() - 1) {
+			Node nodeMaker = new Node(this.tail, this.tail.prev, obj); 
+			this.tail.prev.next = nodeMaker;
+			this.tail.prev = nodeMaker;
+			return true;
+		}	
+		else if (index < this.size() - 1 && index > 0) {
 			Node currNode = this.head;
-			for(int currIndex = 0; currIndex < index-1; currIndex+=1) {
-				if (currIndex == index-2) {
+			for(int currIndex = 0; currIndex <= this.size() - 1; currIndex += 1) {
+				if (currIndex == index) {
 					Node nodeMaker = new Node(currNode.next, currNode, obj); 
 					currNode.next.prev = nodeMaker;
 					currNode.next = nodeMaker;
@@ -175,40 +199,29 @@ public class DSEList implements List {
 				currNode = currNode.next;
 			}	
 			return true;
-		}else if (index == 1) {
-			Node headClone = this.head;
-			Node nodeMaker = new Node(this.head, null, obj); 
-			this.head = nodeMaker;
-			headClone.prev = nodeMaker;
-			return true;
-		}else if (index == this.size()+1) {
-			Node tailClone = this.tail;
-			Node nodeMaker = new Node(null, this.tail, obj); 
-			this.tail = nodeMaker;
-			tailClone.next = nodeMaker;
-			return true;
 		}
-		else { 
+		else {
 			return false;
 		}
 	}
-
-	//searches list for parameter's String return true if found
+	
 	public boolean contains(String obj) {
 		Node currNode = this.head;
 		boolean isInList = false;
 		while (currNode != null) {
 			if (currNode.getString().equals(obj) == true) {
 				isInList = true;
+				break;
 			}
 			if (currNode.next == null) {
 				break;
 			}
+			
 			currNode = currNode.next;
 		}
 		return isInList;
 	}
-
+	
 	//removes the parameter's String form the list
 	public boolean remove(String obj) {
 		if (this.contains(obj) == true) {
@@ -228,5 +241,6 @@ public class DSEList implements List {
 	public boolean equals(Object other) {
 		return true;
 	}
+
 	
 }
