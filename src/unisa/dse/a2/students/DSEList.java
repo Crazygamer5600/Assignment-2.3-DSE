@@ -30,7 +30,7 @@ public class DSEList implements List {
 			Node nodeClone = new Node(null, null, ogIterator.getString()); // deep copy of the next node
 			cloneIterator.next = nodeClone;//sets next of previous deep copy
 			nodeClone.prev = cloneIterator;// sets prev of current deep copy
-			cloneIterator = cloneIterator.next;
+			cloneIterator = cloneIterator.next; //moves clone iterator forward
 			ogIterator = ogIterator.next;// moves original iterator forward
 		}
 		this.tail = cloneIterator;// sets final node
@@ -38,14 +38,14 @@ public class DSEList implements List {
 
 	//remove the String at the parameter's index
 	public String remove(int index) {
-		if (index == 0 && this.size() > 1){
+		if (index == 0 && this.size() > 1){// condition first index needs removing and something comes after
 			Node headCopy = this.head;
 			this.head = this.head.next;
 			headCopy.next = null;
 			this.head.prev = null;
 			return headCopy.getString();
 		} 
-		else if (index == 0){
+		else if (index == 0){// condition first index needs removing and something comes after
 			Node headCopy = this.head;
 			headCopy.next = null;
 			this.head = null;

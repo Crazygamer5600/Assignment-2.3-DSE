@@ -78,8 +78,12 @@ public class SecuritiesExchange {
 	 * @return The number of successful trades completed across all brokers
 	 * @throws UntradedCompanyException when traded company is not listed on this exchange
 	 */
-	public int processTradeRound(){
-		
+	public int processTradeRound() throws UntradedCompanyException{
+		for(int i = 0 ; i < companies.size() ; i++) {			
+			var company = companies.get(i);
+			throw new UntradedCompanyException(company.getCode());
+		}
+		return 0;
 	}
 	
 	/*
