@@ -9,8 +9,8 @@ import unisa.dse.a2.interfaces.ListGeneric;
  */
 public class DSEListGeneric<T> implements ListGeneric <T> {
 	
-	public NodeGeneric head;
-	private NodeGeneric tail;
+	public NodeGeneric<T> head;
+	private NodeGeneric<T> tail;
 
 	public DSEListGeneric() {
 		
@@ -38,20 +38,20 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 
 	//remove and return the item at the parameter's index
 	public T remove(int index) {
-		int x= this.size();
+		int x = this.size();
 		if (index == 0){
-			NodeGeneric headCopy =this.head;
+			NodeGeneric<T> headCopy = this.head;
 			this.head = this.head.next;
 			headCopy.next = null;
-			this.head.prev = null;
-			return (T) this.head;
+			this.head = null;
+			return headCopy.get();
 		} 
 		else if (index == this.size() - 1) {
-			NodeGeneric tailCopy = this.tail;
+			NodeGeneric<T> tailCopy = this.tail;
 			this.tail = this.tail.prev;
 			tailCopy.prev = null;
 			this.tail.next = null;
-			return (T) this.tail;
+			return tailCopy.get();
 		}
 		else {
 			NodeGeneric currNode = this.head;
