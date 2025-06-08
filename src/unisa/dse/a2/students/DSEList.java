@@ -83,9 +83,6 @@ public class DSEList implements List {
 			if (currNode.getString().equals(obj) == true) {
 				currNodeIndex += 1;
 				break;
-			} else if (currNodeIndex == this.size()-1 && currNode.getString().equals(obj) != true) {
-				currNodeIndex = -1;
-				break;
 			}
 			currNode = currNode.next;
 			currNodeIndex += 1;
@@ -116,7 +113,7 @@ public class DSEList implements List {
 		if (this.head == null) {
 			return true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 

@@ -37,6 +37,7 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 
 	//remove and return the item at the parameter's index
 	public T remove(int index) {
+		int x= this.size();
 		if (index == 1){
 			NodeGeneric headCopy =this.head;
 			this.head = this.head.next;
@@ -76,11 +77,8 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		int currNodeIndex = 0;
 		
 		while (currNodeIndex < this.size()) {
-			if (currNode.get() == obj) {
+			if (currNode.get().equals(obj) == true) {
 				currNodeIndex += 1;
-				break;
-			}else if (currNodeIndex == this.size()-1 && currNode.get() != obj) {
-				currNodeIndex = -1;
 				break;
 			}
 			currNode = currNode.next;
@@ -95,8 +93,8 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		int currNodeIndex = 0;
 		int listSize = this.size();
 		
-		if (listSize >= index && listSize != 0) {
-			while (currNode != null && currNodeIndex < index-1) {
+		if (listSize >= index && listSize != 0 && index>=0) {
+			while (currNodeIndex < index) {
 			currNode = currNode.next;
 			currNodeIndex += 1;
 			}
@@ -119,9 +117,17 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 	public int size() {
 		NodeGeneric currNode = this.head;
 		int size = 0;
+		
+		if(this.head.get() != null) {
+			size = 1;
+		}
+
 		while (currNode != null) {
-			currNode = currNode.next;
 			size+=1;
+			currNode = currNode.next;
+			if (currNode.next == null) {
+				break;
+			}
 		}
 		return size;
 	}
@@ -133,7 +139,12 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 		String concatLinkedList = "";
 		
 		while(currNode!= null){
-			concatLinkedList+=currNode.get() + " ";
+			if (currNode!= tail) {
+				concatLinkedList+=currNode.get() + " ";
+			} else {
+				concatLinkedList+=currNode.get();
+				break;
+			}	
 			currNode = currNode.next;
 		}	
 		return concatLinkedList;
@@ -191,13 +202,15 @@ public class DSEListGeneric<T> implements ListGeneric <T> {
 	public boolean contains(Object obj) {
 		NodeGeneric currNode = this.head;
 		boolean isInList = false;
-		while (currNode.next != null || currNode.get() == obj) {
-			if (currNode.get() == obj) {
+		while (currNode != null) {
+			if (currNode.get().equals(obj) == true) {
 				isInList = true;
+				break;
 			}
 			if (currNode.next == null) {
 				break;
 			}
+			
 			currNode = currNode.next;
 		}
 		return isInList;
